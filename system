@@ -1,0 +1,62 @@
+import linecache
+from random import choice
+
+
+episodiosValidos = []
+s01 = [x for x in range(0, 24)]
+s02 = [x for x in range(24, 48)]
+s03 = [x for x in range(48, 73)]
+s04 = [x for x in range(73, 97)]
+s05 = [x for x in range(98, 121)]
+s06 = [x for x in range(122, 146)]
+s07 = [x for x in range(147, 170)]
+s08 = [x for x in range(171, 194)]
+s09 = [x for x in range(195, 218)]
+s10 = [x for x in range(219, 236)]
+
+
+def escolherEpisodio(*temporadas):
+  
+  temporada = choice(temporadas)
+  match temporada:
+    case '1':
+      for episodio in s01: episodiosValidos.append(episodio)
+    case '2':
+      for episodio in s02: episodiosValidos.append(episodio)
+    case '3':
+      for episodio in s03: episodiosValidos.append(episodio)
+    case '4':
+      for episodio in s04: episodiosValidos.append(episodio)
+    case '5':
+      for episodio in s05: episodiosValidos.append(episodio)
+    case '6':
+      for episodio in s06: episodiosValidos.append(episodio)
+    case '7':
+      for episodio in s07: episodiosValidos.append(episodio)
+    case '8':
+      for episodio in s08: episodiosValidos.append(episodio)
+    case '9':
+      for episodio in s09: episodiosValidos.append(episodio)
+    case '10':
+      for episodio in s10: episodiosValidos.append(episodio)
+  episodio = choice(episodiosValidos) + 1
+  return episodio
+    
+
+def acessarEpisodio(episodio):
+
+  linha = linecache.getline('s01.txt', int(episodio))
+  dado = linha.split(';')
+  overall, episode, title, director, writter, airdate, prodcode, usviews = dado
+  print(
+    f'Overall: {overall}\nEpisode: {episode}\nTitle: {title}\n'
+    f'Directed By: {director}\nWritten By: {writter}\nOriginal Air Date: {airdate}'
+    f'\nProduction Code: {prodcode}\nUS Viewers (Mi): {usviews}'
+  )  
+  
+
+
+temporadas = input('Digite as temporadas: ').split()
+
+episodio = escolherEpisodio(*temporadas)
+acessarEpisodio(episodio)
